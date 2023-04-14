@@ -8,13 +8,23 @@
 import SwiftUI
 
 struct MainMessageView: View {
+    
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            UserNavBar()
+            AllMessages()
+        }
+        .overlay(NewMessageButton(), alignment: .bottom)
     }
 }
 
 struct MainMessageView_Previews: PreviewProvider {
     static var previews: some View {
         MainMessageView()
+        
+        MainMessageView()
+            .preferredColorScheme(.dark)
     }
 }

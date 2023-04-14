@@ -13,20 +13,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             if viewModel.isSignedIn {
-                VStack {
-                    Text("You are signed in")
-                    
-                    Button(action: {
-                        viewModel.signOut()
-                    }, label: {
-                        Text("Sign out")
-                            .foregroundColor(Color.mint)
-                            .frame(width: 200, height: 50)
-                            .background(Color.gray)
-                    })
-                
-                }
-
+                MainMessageView()
             } else {
                 LoginView()
             }

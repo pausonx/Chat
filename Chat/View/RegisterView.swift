@@ -10,7 +10,8 @@ import SwiftUI
 struct RegisterView: View {
     @State var shouldShowImagePicker = false
     @State var image: UIImage?
-    
+
+    @State private var isValidImage: Bool = false
     @State private var isValidLogin: Bool = false
     @State private var isValidPassword: Bool = false
     
@@ -39,7 +40,15 @@ struct RegisterView: View {
         setupNavigationBarAppearance(titleColor: UIColor.white, barColor: UIColor.systemIndigo)
     }
 
-
+    func isImage() -> Bool {
+        if image != nil{
+            return true
+        }
+        else{
+            return false
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 20) {
             
@@ -61,12 +70,14 @@ struct RegisterView: View {
                     } else {
                         Image(systemName: "person.circle")
                             .font(.system(size: 150, weight: .thin))
+                        
+                        TextFieldHint(hint: "You must select a profile image.")
                     }
                 }
                 
             }
-            
 
+            
             //MARK: - Login
             VStack(alignment: .leading, spacing: 10) {
                 TextFieldName(name: "Login")
@@ -126,7 +137,7 @@ struct RegisterView: View {
                     .foregroundColor(.white)
                     .frame(width: 200, height: 40, alignment: .center)
             }
-            .disabled((isValidLogin && isValidPassword) == false)
+            .disabled((isValidLogin && isValidPassword && isImage()) == false)
             .background(isValidLogin && isValidPassword ? Color.indigo : .secondary)
             .cornerRadius(5)
 
