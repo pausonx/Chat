@@ -8,10 +8,15 @@
 import SwiftUI
 
 struct RegisterView: View {
+    @State var shouldShowImagePicker = false
+    @State var image: UIImage?
+    
     @State private var isValidLogin: Bool = false
     @State private var isValidPassword: Bool = false
+    
     @State private var loginHint: String = ""
     @State private var passwordHint: String = ""
+    
 
     @State private var login: String = "" {
         didSet {
@@ -31,25 +36,36 @@ struct RegisterView: View {
     @EnvironmentObject var viewModel: AppViewModel
 
     init() {
-        setupNavigationBarAppearance(titleColor: UIColor.white, barColor: UIColor.systemMint)
+        setupNavigationBarAppearance(titleColor: UIColor.white, barColor: UIColor.systemIndigo)
     }
 
 
     var body: some View {
         VStack(spacing: 20) {
-
-            Image(systemName: "person.crop.circle")
-                .font(.system(size: 80, weight: .thin))
-                .frame(height: 120, alignment: .bottom)
-
-            Text("Enter login and password")
-                .font(.system(size: 20, weight: .thin))
-
-            //LoginTextField(isValidLogin: $isValidLogin)
-
-            //PasswordTextField(isValidPassword: $isValidPassword)
-
-            //LoginButton(isValidLogin: $isValidLogin, isValidPassword: $isValidPassword)
+            
+            //MARK: - ProfileImageButton
+            TextFieldName(name: "Profile Image")
+                .frame(height: 50, alignment: .bottom)
+                
+            Button {
+                shouldShowImagePicker.toggle()
+            } label: {
+                VStack {
+                    if let image = self.image {
+                        Image(uiImage: image)
+                            .resizable()
+                            .frame(width: 150, height: 150)
+                            .scaledToFit()
+                            .cornerRadius(150)
+                            .overlay(RoundedRectangle(cornerRadius: 150).stroke(Color.black, lineWidth: 2))
+                    } else {
+                        Image(systemName: "person.circle")
+                            .font(.system(size: 150, weight: .thin))
+                    }
+                }
+                
+            }
+            
 
             //MARK: - Login
             VStack(alignment: .leading, spacing: 10) {
@@ -98,11 +114,12 @@ struct RegisterView: View {
                     .foregroundColor(.black.opacity(0.8))
 
                 TextFieldHint(hint: passwordHint)
+                
             }
-
+            
             //MARK: - LoginButton
             Button {
-                viewModel.signUp(login: login, password: password)
+                viewModel.signUp(login: login, password: password, image: image)
             } label: {
                 Text("Sign up")
                     .font(.system(size: 18))
@@ -110,15 +127,24 @@ struct RegisterView: View {
                     .frame(width: 200, height: 40, alignment: .center)
             }
             .disabled((isValidLogin && isValidPassword) == false)
-            .background(isValidLogin && isValidPassword ? Color.mint : .secondary)
+            .background(isValidLogin && isValidPassword ? Color.indigo : .secondary)
             .cornerRadius(5)
 
             Spacer()
 
+            HStack{
+                Text("Already have an account?")
+                NavigationLink("Sign in", destination: LoginView())
+                    .foregroundColor(Color.indigo)
+            }
+            
         }
         .padding()
         .navigationBarTitle("Chat", displayMode: .inline)
         .background(colorScheme == .dark ? Color(UIColor(.secondary.opacity(0.7))) : Color(UIColor(.secondary.opacity(0.1))))
+        .fullScreenCover(isPresented: $shouldShowImagePicker, onDismiss: nil) {
+            ImagePicker(image: $image)
+        }
     }
 }
 

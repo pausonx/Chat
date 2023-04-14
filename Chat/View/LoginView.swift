@@ -32,7 +32,7 @@ struct LoginView: View {
     @EnvironmentObject var viewModel: AppViewModel
 
     init() {
-        setupNavigationBarAppearance(titleColor: UIColor.white, barColor: UIColor.systemMint)
+        setupNavigationBarAppearance(titleColor: UIColor.white, barColor: UIColor.systemIndigo)
     }
 
 
@@ -45,12 +45,6 @@ struct LoginView: View {
 
             Text("Enter login and password")
                 .font(.system(size: 20, weight: .thin))
-
-            //LoginTextField(isValidLogin: $isValidLogin)
-
-            //PasswordTextField(isValidPassword: $isValidPassword)
-
-            //LoginButton(isValidLogin: $isValidLogin, isValidPassword: $isValidPassword)
 
             //MARK: - Login
             VStack(alignment: .leading, spacing: 10) {
@@ -111,15 +105,15 @@ struct LoginView: View {
                     .frame(width: 200, height: 40, alignment: .center)
             }
             .disabled((isValidLogin && isValidPassword) == false)
-            .background(isValidLogin && isValidPassword ? Color.mint : .secondary)
+            .background(isValidLogin && isValidPassword ? Color.indigo : .secondary)
             .cornerRadius(5)
 
             Spacer()
 
             HStack{
-                Text("Already have an account?")
+                Text("No account yet?")
                 NavigationLink("Sign up", destination: RegisterView())
-                    .foregroundColor(Color.mint)
+                    .foregroundColor(Color.indigo)
             }
 
         }

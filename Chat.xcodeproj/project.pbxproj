@@ -19,6 +19,11 @@
 		D0B012B029E96B9700CC403A /* LoginClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012AF29E96B9700CC403A /* LoginClass.swift */; };
 		D0B012B229E96BCB00CC403A /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012B129E96BCB00CC403A /* RegisterView.swift */; };
 		D0B012B429E96C6000CC403A /* LoginEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012B329E96C6000CC403A /* LoginEnums.swift */; };
+		D0B012B729E9777B00CC403A /* TextFieldName.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012B529E9777B00CC403A /* TextFieldName.swift */; };
+		D0B012B829E9777B00CC403A /* TextFieldHint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012B629E9777B00CC403A /* TextFieldHint.swift */; };
+		D0B012BA29E98B0600CC403A /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012B929E98B0600CC403A /* FirebaseManager.swift */; };
+		D0B012BC29E98E6000CC403A /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012BB29E98E6000CC403A /* ImagePicker.swift */; };
+		D0B012BE29E9CABB00CC403A /* MainMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012BD29E9CABB00CC403A /* MainMessageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +42,11 @@
 		D0B012AF29E96B9700CC403A /* LoginClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginClass.swift; sourceTree = "<group>"; };
 		D0B012B129E96BCB00CC403A /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		D0B012B329E96C6000CC403A /* LoginEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEnums.swift; sourceTree = "<group>"; };
+		D0B012B529E9777B00CC403A /* TextFieldName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldName.swift; sourceTree = "<group>"; };
+		D0B012B629E9777B00CC403A /* TextFieldHint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldHint.swift; sourceTree = "<group>"; };
+		D0B012B929E98B0600CC403A /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		D0B012BB29E98E6000CC403A /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		D0B012BD29E9CABB00CC403A /* MainMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +124,7 @@
 				D02D5EE929E94F6E00EF2761 /* ContentView.swift */,
 				D02D5F0B29E962B800EF2761 /* LoginView.swift */,
 				D0B012B129E96BCB00CC403A /* RegisterView.swift */,
+				D0B012BD29E9CABB00CC403A /* MainMessageView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -121,7 +132,10 @@
 		D02D5EF929E9519800EF2761 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				D0B012B629E9777B00CC403A /* TextFieldHint.swift */,
+				D0B012B529E9777B00CC403A /* TextFieldName.swift */,
 				D0B012B329E96C6000CC403A /* LoginEnums.swift */,
+				D0B012BB29E98E6000CC403A /* ImagePicker.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -132,6 +146,7 @@
 				D02D5F0529E9521600EF2761 /* CheckValid.swift */,
 				D02D5F0629E9521600EF2761 /* CustomNavigationBar.swift */,
 				D0B012AF29E96B9700CC403A /* LoginClass.swift */,
+				D0B012B929E98B0600CC403A /* FirebaseManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -253,12 +268,17 @@
 			files = (
 				D02D5F0729E9521600EF2761 /* CheckValid.swift in Sources */,
 				D0B012B429E96C6000CC403A /* LoginEnums.swift in Sources */,
+				D0B012BE29E9CABB00CC403A /* MainMessageView.swift in Sources */,
 				D02D5F0829E9521600EF2761 /* CustomNavigationBar.swift in Sources */,
 				D0B012B029E96B9700CC403A /* LoginClass.swift in Sources */,
+				D0B012BA29E98B0600CC403A /* FirebaseManager.swift in Sources */,
 				D02D5EEA29E94F6E00EF2761 /* ContentView.swift in Sources */,
 				D0B012B229E96BCB00CC403A /* RegisterView.swift in Sources */,
 				D02D5F0C29E962B800EF2761 /* LoginView.swift in Sources */,
 				D02D5EE829E94F6E00EF2761 /* ChatApp.swift in Sources */,
+				D0B012BC29E98E6000CC403A /* ImagePicker.swift in Sources */,
+				D0B012B829E9777B00CC403A /* TextFieldHint.swift in Sources */,
+				D0B012B729E9777B00CC403A /* TextFieldName.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,11 +411,10 @@
 				DEVELOPMENT_TEAM = 3NH8XKCR79;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"Need to make profile\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -421,11 +440,10 @@
 				DEVELOPMENT_TEAM = 3NH8XKCR79;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"Need to make profile\"";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
