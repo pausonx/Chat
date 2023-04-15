@@ -58,7 +58,7 @@ struct UserNavBar: View {
         }
         .padding()
         .actionSheet(isPresented: $shouldShowLogOutOptions) {
-            .init(title: Text("Settings"), message: Text("What do you want to do?"), buttons: [
+            .init(title: Text("Sign out"), message: Text("Are you sure?"), buttons: [
                 .destructive(Text("Sign Out"), action: {
                     viewModel.signOut()
                 }),
