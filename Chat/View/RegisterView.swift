@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
 
 struct RegisterView: View {
     @State var shouldShowImagePicker = false
@@ -32,10 +33,15 @@ struct RegisterView: View {
             passwordHint = isValidPassword ? "" : Hint.password.rawValue
         }
     }
+    
+    @State private var name: String = ""
 
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var viewModel: AppViewModel
 
+    
+    @ObservedObject private var NMViewModel = NewMessageUsersModel()
+    
     init() {
         setupNavigationBarAppearance(titleColor: UIColor.white, barColor: UIColor.systemIndigo)
     }
@@ -77,10 +83,33 @@ struct RegisterView: View {
                 
             }
 
-            
-            //MARK: - Login
+            //MARK: - Name
             VStack(alignment: .leading, spacing: 10) {
-                TextFieldName(name: "Login")
+                TextFieldName(name: "Name")
+
+                TextField("", text: $name)
+                    .onChange(of: name, perform: { newValue in
+                        self.name = newValue
+                    })
+                    .font(.system(size: 20, weight: .thin))
+                    .disableAutocorrection(true)
+                    .autocapitalization(.none)
+                    .frame(height: 45)
+                    .cornerRadius(5)
+                    .padding(EdgeInsets(top: 2, leading: 10, bottom: 2, trailing: 6))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 5)
+                            .stroke(lineWidth: 0.1)
+                    )
+                    .background(Color.white)
+                    .foregroundColor(.black.opacity(0.8))
+
+                TextFieldHint(hint: loginHint)
+            }
+
+            //MARK: - Email
+            VStack(alignment: .leading, spacing: 10) {
+                TextFieldName(name: "Email")
 
                 TextField("", text: $login)
                     .onChange(of: login, perform: { newValue in
@@ -98,8 +127,9 @@ struct RegisterView: View {
                     )
                     .background(Color.white)
                     .foregroundColor(.black.opacity(0.8))
-
+                
                 TextFieldHint(hint: loginHint)
+                
             }
 
 
@@ -123,21 +153,18 @@ struct RegisterView: View {
                     )
                     .background(Color.white)
                     .foregroundColor(.black.opacity(0.8))
-
-                TextFieldHint(hint: passwordHint)
-                
             }
             
             //MARK: - LoginButton
             Button {
-                viewModel.signUp(login: login, password: password, image: image)
+                viewModel.signUp(login: login, password: password, image: image, name: name)
             } label: {
                 Text("Sign up")
                     .font(.system(size: 18))
                     .foregroundColor(.white)
                     .frame(width: 200, height: 40, alignment: .center)
             }
-            .disabled((isValidLogin && isValidPassword && isImage()) == false)
+            .disabled((isValidLogin && isValidPassword && isImage() && (name != "")) == false)
             .background(isValidLogin && isValidPassword ? Color.indigo : .secondary)
             .cornerRadius(5)
 

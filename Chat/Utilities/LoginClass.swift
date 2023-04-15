@@ -32,13 +32,13 @@ class AppViewModel: ObservableObject {
         }
     }
     
-    func signUp(login: String, password: String, image: UIImage?) {
+    func signUp(login: String, password: String, image: UIImage?, name: String) {
         auth.createUser(withEmail: login, password: password)  { [weak self] result, error in
             guard result != nil, error == nil else {
                 return
             }
             
-            self?.persisitImageToStorage(email: login, image: image)
+            self?.persisitImageToStorage(email: login, image: image, name: name)
             
             DispatchQueue.main.async {
                 //Success
@@ -47,7 +47,7 @@ class AppViewModel: ObservableObject {
         }
     }
     
-    func persisitImageToStorage(email: String, image: UIImage?) {
+    func persisitImageToStorage(email: String, image: UIImage?, name: String) {
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
         let ref = FirebaseManager.shared.storage.reference(withPath: uid)
         guard let imageData = image?.jpegData(compressionQuality: 0.5) else { return }
@@ -66,16 +66,16 @@ class AppViewModel: ObservableObject {
                 print("Successfully stored image with url: \(url?.absoluteString ?? "")")
                 
                 guard let url = url else {return}
-                self.storeUserInformation(email: email, imageProfileUrl: url)
+                self.storeUserInformation(email: email, imageProfileUrl: url, name: name)
             }
         }
     }
     
-    private func storeUserInformation(email: String, imageProfileUrl: URL){
+    private func storeUserInformation(email: String, imageProfileUrl: URL, name: String){
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else {
             return
         }
-        let userData = ["email": email, "uid": uid, "profileImageUrl": imageProfileUrl.absoluteString]
+        let userData = ["email": email, "uid": uid, "profileImageUrl": imageProfileUrl.absoluteString, "name" : name]
         FirebaseManager.shared.firestore.collection("users")
                 .document(uid).setData(userData) { err in
                     if let err = err {

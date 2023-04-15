@@ -26,8 +26,11 @@
 		D0B012BE29E9CABB00CC403A /* MainMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012BD29E9CABB00CC403A /* MainMessageView.swift */; };
 		D0B012C029E9CF7B00CC403A /* UserNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012BF29E9CF7B00CC403A /* UserNavBar.swift */; };
 		D0B012C229E9D05200CC403A /* AllMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012C129E9D05200CC403A /* AllMessages.swift */; };
-		D0B012C429E9D0A600CC403A /* NewMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012C329E9D0A600CC403A /* NewMessageButton.swift */; };
-		D0B012C629E9EBEC00CC403A /* MainMassageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012C529E9EBEC00CC403A /* MainMassageViewModel.swift */; };
+		D0B012C629E9EBEC00CC403A /* MainMessagesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012C529E9EBEC00CC403A /* MainMessagesViewModel.swift */; };
+		D0B012CC29EAB7CA00CC403A /* NewMessageUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012CB29EAB7CA00CC403A /* NewMessageUsers.swift */; };
+		D0B012CE29EABE4300CC403A /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012CD29EABE4300CC403A /* ChatUser.swift */; };
+		D0B012D029EABE6B00CC403A /* NewMessageUsersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012CF29EABE6B00CC403A /* NewMessageUsersModel.swift */; };
+		D0B012D329EAD06A00CC403A /* ChatMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012D229EAD06A00CC403A /* ChatMessageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,8 +56,11 @@
 		D0B012BD29E9CABB00CC403A /* MainMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessageView.swift; sourceTree = "<group>"; };
 		D0B012BF29E9CF7B00CC403A /* UserNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNavBar.swift; sourceTree = "<group>"; };
 		D0B012C129E9D05200CC403A /* AllMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllMessages.swift; sourceTree = "<group>"; };
-		D0B012C329E9D0A600CC403A /* NewMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageButton.swift; sourceTree = "<group>"; };
-		D0B012C529E9EBEC00CC403A /* MainMassageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMassageViewModel.swift; sourceTree = "<group>"; };
+		D0B012C529E9EBEC00CC403A /* MainMessagesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMessagesViewModel.swift; sourceTree = "<group>"; };
+		D0B012CB29EAB7CA00CC403A /* NewMessageUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageUsers.swift; sourceTree = "<group>"; };
+		D0B012CD29EABE4300CC403A /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
+		D0B012CF29EABE6B00CC403A /* NewMessageUsersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageUsersModel.swift; sourceTree = "<group>"; };
+		D0B012D229EAD06A00CC403A /* ChatMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +136,7 @@
 		D02D5EF729E9518700EF2761 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D0B012D229EAD06A00CC403A /* ChatMessageView.swift */,
 				D02D5EE929E94F6E00EF2761 /* ContentView.swift */,
 				D02D5F0B29E962B800EF2761 /* LoginView.swift */,
 				D0B012B129E96BCB00CC403A /* RegisterView.swift */,
@@ -141,13 +148,10 @@
 		D02D5EF929E9519800EF2761 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				D0B012B629E9777B00CC403A /* TextFieldHint.swift */,
-				D0B012B529E9777B00CC403A /* TextFieldName.swift */,
-				D0B012B329E96C6000CC403A /* LoginEnums.swift */,
+				D0B012D129EAD02500CC403A /* ChatMessage */,
+				D0B012CA29EAB70900CC403A /* MainMessage */,
+				D0B012C929EAB6D300CC403A /* LoginRegister */,
 				D0B012BB29E98E6000CC403A /* ImagePicker.swift */,
-				D0B012BF29E9CF7B00CC403A /* UserNavBar.swift */,
-				D0B012C129E9D05200CC403A /* AllMessages.swift */,
-				D0B012C329E9D0A600CC403A /* NewMessageButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -166,9 +170,38 @@
 		D0B012C729E9EBF000CC403A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D0B012C529E9EBEC00CC403A /* MainMassageViewModel.swift */,
+				D0B012C529E9EBEC00CC403A /* MainMessagesViewModel.swift */,
+				D0B012CD29EABE4300CC403A /* ChatUser.swift */,
+				D0B012CF29EABE6B00CC403A /* NewMessageUsersModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		D0B012C929EAB6D300CC403A /* LoginRegister */ = {
+			isa = PBXGroup;
+			children = (
+				D0B012B629E9777B00CC403A /* TextFieldHint.swift */,
+				D0B012B529E9777B00CC403A /* TextFieldName.swift */,
+				D0B012B329E96C6000CC403A /* LoginEnums.swift */,
+			);
+			path = LoginRegister;
+			sourceTree = "<group>";
+		};
+		D0B012CA29EAB70900CC403A /* MainMessage */ = {
+			isa = PBXGroup;
+			children = (
+				D0B012C129E9D05200CC403A /* AllMessages.swift */,
+				D0B012BF29E9CF7B00CC403A /* UserNavBar.swift */,
+				D0B012CB29EAB7CA00CC403A /* NewMessageUsers.swift */,
+			);
+			path = MainMessage;
+			sourceTree = "<group>";
+		};
+		D0B012D129EAD02500CC403A /* ChatMessage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ChatMessage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -289,17 +322,20 @@
 				D0B012C029E9CF7B00CC403A /* UserNavBar.swift in Sources */,
 				D02D5F0729E9521600EF2761 /* CheckValid.swift in Sources */,
 				D0B012B429E96C6000CC403A /* LoginEnums.swift in Sources */,
+				D0B012D329EAD06A00CC403A /* ChatMessageView.swift in Sources */,
 				D0B012BE29E9CABB00CC403A /* MainMessageView.swift in Sources */,
 				D02D5F0829E9521600EF2761 /* CustomNavigationBar.swift in Sources */,
+				D0B012CE29EABE4300CC403A /* ChatUser.swift in Sources */,
 				D0B012B029E96B9700CC403A /* LoginClass.swift in Sources */,
+				D0B012D029EABE6B00CC403A /* NewMessageUsersModel.swift in Sources */,
 				D0B012BA29E98B0600CC403A /* FirebaseManager.swift in Sources */,
+				D0B012CC29EAB7CA00CC403A /* NewMessageUsers.swift in Sources */,
 				D0B012C229E9D05200CC403A /* AllMessages.swift in Sources */,
 				D02D5EEA29E94F6E00EF2761 /* ContentView.swift in Sources */,
 				D0B012B229E96BCB00CC403A /* RegisterView.swift in Sources */,
 				D02D5F0C29E962B800EF2761 /* LoginView.swift in Sources */,
-				D0B012C629E9EBEC00CC403A /* MainMassageViewModel.swift in Sources */,
+				D0B012C629E9EBEC00CC403A /* MainMessagesViewModel.swift in Sources */,
 				D02D5EE829E94F6E00EF2761 /* ChatApp.swift in Sources */,
-				D0B012C429E9D0A600CC403A /* NewMessageButton.swift in Sources */,
 				D0B012BC29E98E6000CC403A /* ImagePicker.swift in Sources */,
 				D0B012B829E9777B00CC403A /* TextFieldHint.swift in Sources */,
 				D0B012B729E9777B00CC403A /* TextFieldName.swift in Sources */,

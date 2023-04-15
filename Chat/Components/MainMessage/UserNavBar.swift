@@ -31,9 +31,9 @@ struct UserNavBar: View {
                 .shadow(radius: 5)
             
             VStack(alignment: .leading, spacing: 4) {
-                let email = MMViewModel.chatUser?.email.replacingOccurrences(of: "@gmail.com", with: "") ?? ""
+                let name = MMViewModel.chatUser?.name ?? ""
                 
-                Text(email)
+                Text(name)
                     .font(.system(size: 24, weight: .bold))
                 
                 HStack {

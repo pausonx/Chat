@@ -7,10 +7,6 @@
 
 import Foundation
 
-struct ChatUser {
-    let uid, email, profileImageUrl: String
-}
-
 class MainMessagesViewModel: ObservableObject {
     
     @Published var errorMessage = ""
@@ -40,12 +36,8 @@ class MainMessagesViewModel: ObservableObject {
                 return
                 
             }
-
             
-            let uid = data["uid"] as? String ?? ""
-            let email = data["email"] as? String ?? ""
-            let profileImageUrl = data["profileImageUrl"] as? String ?? ""
-            self.chatUser = ChatUser(uid: uid, email: email, profileImageUrl: profileImageUrl)
+            self.chatUser = ChatUser(data: data)
             
             
         }

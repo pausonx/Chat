@@ -14,6 +14,7 @@ struct ContentView: View {
         NavigationView {
             if viewModel.isSignedIn {
                 MainMessageView()
+                    .navigationBarHidden(true)
             } else {
                 LoginView()
             }
