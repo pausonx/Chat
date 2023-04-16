@@ -6,38 +6,56 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct AllMessages: View {
     @Environment(\.colorScheme) var colorScheme
+    @ObservedObject private var MMViewModel = MainMessagesViewModel()
+    @State var chatUser: ChatUser?
+    @State var shouldNavigateToChatLogView = false
+    
+    private var chatLogViewModel = ChatLogViewModel(chatUser: nil)
     
     var body: some View {
         ScrollView {
-            ForEach(0..<10, id: \.self) { num in
+            Text("")
+            ForEach(MMViewModel.recentMessages) { recent in
                 VStack {
-                    NavigationLink {
-                        Text("Destination")
+                    NavigationLink(destination: ChatLogView(CLViewModel: self.chatLogViewModel), isActive: self.$shouldNavigateToChatLogView){
+                    }
+                    Button {
+                        let uid = FirebaseManager.shared.auth.currentUser?.uid == recent.fromId ? recent.toId : recent.fromId
+                        self.chatUser = .init(data: [FirebaseConstants.name: recent.name, FirebaseConstants.profileImageUrl: recent.profileImageUrl, FirebaseConstants.uid: uid])
+                        self.chatLogViewModel.chatUser = self.chatUser
+                        self.chatLogViewModel.fetchMessages()
+                        self.shouldNavigateToChatLogView.toggle()
                     } label: {
                         Spacer()
                         HStack(spacing: 16) {
-                            Image(systemName: "person.fill")
-                                .font(.system(size: 35))
-                                .padding(8)
-                                .overlay(RoundedRectangle(cornerRadius: 40)
+                            WebImage(url: URL(string: recent.profileImageUrl))
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 64, height: 64)
+                                .cornerRadius(64)
+                                .overlay(RoundedRectangle(cornerRadius: 50)
                                     .stroke(Color(.label), lineWidth: 1)
                                 )
+                                .shadow(radius: 2)
                             
                             
-                            VStack(alignment: .leading) {
-                                Text("Username")
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text(recent.name)
                                     .font(.system(size: 16, weight: .bold))
-                                Text("Message sent to user")
+                                Text(recent.text)
                                     .font(.system(size: 14))
                                     .foregroundColor(Color("Gray"))
+                                    .multilineTextAlignment(.leading)
+                                    
                             }
                             Spacer()
                             
                             VStack {
-                                Text("22d")
+                                Text(recent.timeAgo)
                                     .font(.system(size: 14, weight: .medium))
                                 Spacer()
                             }
@@ -48,11 +66,11 @@ struct AllMessages: View {
                     
                     Divider()
                         .padding(.vertical, 10)
-                }.padding(.horizontal)
+                }.padding(.horizontal, 5)
             }
         }
         .background(colorScheme == .dark ? Color(UIColor(.secondary.opacity(0.5))) : Color(UIColor(.secondary.opacity(0.1))))
-        .padding(.top, -8)
+        .padding(.top, -7)
     }
 }
 

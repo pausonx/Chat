@@ -35,7 +35,7 @@ struct MainMessageView: View {
         }
         .background(
             NavigationLink(
-                destination: ChatLogView(chatUser: chatUser),
+                destination: ChatLogView(CLViewModel: ChatLogViewModel(chatUser: chatUser)),
                 isActive: $shouldNavigateToChatLogView
             ) {
                 EmptyView()

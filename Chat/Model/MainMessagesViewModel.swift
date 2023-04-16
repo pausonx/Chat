@@ -6,14 +6,69 @@
 //
 
 import Foundation
+import FirebaseFirestore
+import FirebaseFirestoreSwift
+
+struct RecentMessage: Codable, Identifiable {
+    
+    @DocumentID var id: String?
+    let text, fromId, toId: String
+    let profileImageUrl: String
+    let name: String
+    let timestamp: Date
+    
+    var timeAgo: String {
+            let formatter = RelativeDateTimeFormatter()
+            formatter.unitsStyle = .abbreviated
+            return formatter.localizedString(for: timestamp, relativeTo: Date())
+    }
+}
 
 class MainMessagesViewModel: ObservableObject {
     
     @Published var errorMessage = ""
     @Published var chatUser: ChatUser?
+    @Published var recentMessages = [RecentMessage]()
     
     init() {
         fetchCurrentUser()
+        
+        fetchRecentMessages()
+    }
+    
+    private func fetchRecentMessages(){
+        guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
+                
+        FirebaseManager.shared.firestore
+            .collection(FirebaseConstants.recentMessages)
+            .document(uid)
+            .collection(FirebaseConstants.messages)
+            .order(by: FirebaseConstants.timestamp)
+            .addSnapshotListener { querySnapshot, error in
+                if let error = error {
+                    self.errorMessage = "Failed to listen for recent messages: \(error)"
+                    print(error)
+                    return
+                }
+                
+                querySnapshot?.documentChanges.forEach({ change in
+                    let docId = change.document.documentID
+                    
+                    if let index = self.recentMessages.firstIndex(where: { rm in
+                        return rm.id == docId
+                    }) {
+                        self.recentMessages.remove(at: index)
+                    }
+
+                    do {
+                        if let rm = try change.document.data(as: RecentMessage?.self) {
+                            self.recentMessages.insert(rm, at: 0)
+                        }
+                    } catch {
+                        print(error)
+                    }
+                })
+            }
     }
     
     private func fetchCurrentUser() {
@@ -38,7 +93,7 @@ class MainMessagesViewModel: ObservableObject {
             }
             
             self.chatUser = ChatUser(data: data)
-            
+            FirebaseManager.shared.currentUser = self.chatUser
             
         }
     }

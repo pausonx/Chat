@@ -9,10 +9,11 @@ import SwiftUI
 
 struct ChatMessageView: View {
     @Binding var shouldNavigateToChatLogView: Bool
+    @State var chatUser: ChatUser?
     
     var body: some View {
         NavigationLink(
-            destination: ChatLogView(chatUser: nil),
+            destination: ChatLogView(CLViewModel: ChatLogViewModel(chatUser: chatUser)),
             isActive: $shouldNavigateToChatLogView,
             label: {
                 Text("ChatMessageView")

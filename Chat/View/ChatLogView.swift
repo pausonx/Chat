@@ -9,12 +9,12 @@ import SwiftUI
 
 struct ChatLogView: View {
     
-    let chatUser: ChatUser?
-    
-    init(chatUser: ChatUser?){
-        self.chatUser = chatUser
-        self.CLViewModel = .init(chatUser: chatUser)
-    }
+//    let chatUser: ChatUser?
+//
+//    init(chatUser: ChatUser?){
+//        self.chatUser = chatUser
+//        self.CLViewModel = .init(chatUser: chatUser)
+//    }
     
     @ObservedObject var CLViewModel: ChatLogViewModel
     
@@ -23,7 +23,7 @@ struct ChatLogView: View {
             messagesView
             Text(CLViewModel.errorMessage)
         }
-        .navigationTitle(chatUser?.name ?? "")
+        .navigationTitle(CLViewModel.chatUser?.name ?? "")
         .navigationBarTitleDisplayMode(.inline)
     }
     
@@ -97,8 +97,6 @@ private struct DescriptionPlaceholder: View {
 
 struct ChatLogView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            ChatLogView(chatUser: .init(data: ["email": "bogdan@gmail.com"]))
-        }
+        MainMessageView()
     }
 }
