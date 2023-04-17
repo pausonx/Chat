@@ -34,6 +34,7 @@ Messages on the homepage are sorted so that the latest ones are at the top.  By 
 
 ### Chat page
 The application allows sending text messages, in the future it is planned to develop this solution with the possibility of sending image files.
+
 ![image](https://user-images.githubusercontent.com/76847632/232449480-eb5a6cbc-994f-40e0-a936-55ec46ce58cc.png)
 
 ### Sign out
