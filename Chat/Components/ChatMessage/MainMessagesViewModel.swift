@@ -9,21 +9,6 @@ import Foundation
 import FirebaseFirestore
 import FirebaseFirestoreSwift
 
-struct RecentMessage: Codable, Identifiable {
-    
-    @DocumentID var id: String?
-    let text, fromId, toId: String
-    let profileImageUrl: String
-    let name: String
-    let timestamp: Date
-    
-    var timeAgo: String {
-            let formatter = RelativeDateTimeFormatter()
-            formatter.unitsStyle = .abbreviated
-            return formatter.localizedString(for: timestamp, relativeTo: Date())
-    }
-}
-
 class MainMessagesViewModel: ObservableObject {
     
     @Published var errorMessage = ""
@@ -38,7 +23,7 @@ class MainMessagesViewModel: ObservableObject {
     
     private func fetchRecentMessages(){
         guard let uid = FirebaseManager.shared.auth.currentUser?.uid else { return }
-                
+
         FirebaseManager.shared.firestore
             .collection(FirebaseConstants.recentMessages)
             .document(uid)
@@ -50,23 +35,17 @@ class MainMessagesViewModel: ObservableObject {
                     print(error)
                     return
                 }
-                
+
                 querySnapshot?.documentChanges.forEach({ change in
                     let docId = change.document.documentID
-                    
+
                     if let index = self.recentMessages.firstIndex(where: { rm in
                         return rm.id == docId
                     }) {
                         self.recentMessages.remove(at: index)
                     }
 
-                    do {
-                        if let rm = try change.document.data(as: RecentMessage?.self) {
-                            self.recentMessages.insert(rm, at: 0)
-                        }
-                    } catch {
-                        print(error)
-                    }
+                    self.recentMessages.insert(.init(documentId: docId, data: change.document.data()), at: 0)
                 })
             }
     }

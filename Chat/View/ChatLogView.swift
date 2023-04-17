@@ -9,12 +9,6 @@ import SwiftUI
 
 struct ChatLogView: View {
     
-//    let chatUser: ChatUser?
-//
-//    init(chatUser: ChatUser?){
-//        self.chatUser = chatUser
-//        self.CLViewModel = .init(chatUser: chatUser)
-//    }
     
     @ObservedObject var CLViewModel: ChatLogViewModel
     
@@ -33,7 +27,7 @@ struct ChatLogView: View {
         ScrollView {
             ScrollViewReader { scrollViewProxy in
                 VStack {
-                    ForEach(CLViewModel.chatMessages) { message in
+                    ForEach(Array(CLViewModel.chatMessages.enumerated()), id: \.offset) {index, message in
                         MessageView(message: message)
                     }
                     

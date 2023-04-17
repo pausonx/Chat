@@ -21,6 +21,7 @@
 		D0792B4929EB29710073077F /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0792B4829EB29710073077F /* ChatMessage.swift */; };
 		D0792B4B29EB299E0073077F /* ChatLogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0792B4A29EB299E0073077F /* ChatLogViewModel.swift */; };
 		D0792B4D29EC414E0073077F /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0792B4C29EC414E0073077F /* FirebaseConstants.swift */; };
+		D0996B4F29ED33A3001969EE /* RecentMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0996B4E29ED33A3001969EE /* RecentMessage.swift */; };
 		D0B012B029E96B9700CC403A /* LoginClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012AF29E96B9700CC403A /* LoginClass.swift */; };
 		D0B012B229E96BCB00CC403A /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012B129E96BCB00CC403A /* RegisterView.swift */; };
 		D0B012B429E96C6000CC403A /* LoginEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B012B329E96C6000CC403A /* LoginEnums.swift */; };
@@ -56,6 +57,7 @@
 		D0792B4829EB29710073077F /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		D0792B4A29EB299E0073077F /* ChatLogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogViewModel.swift; sourceTree = "<group>"; };
 		D0792B4C29EC414E0073077F /* FirebaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
+		D0996B4E29ED33A3001969EE /* RecentMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentMessage.swift; sourceTree = "<group>"; };
 		D0B012AF29E96B9700CC403A /* LoginClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginClass.swift; sourceTree = "<group>"; };
 		D0B012B129E96BCB00CC403A /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		D0B012B329E96C6000CC403A /* LoginEnums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginEnums.swift; sourceTree = "<group>"; };
@@ -182,9 +184,9 @@
 		D0B012C729E9EBF000CC403A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				D0B012C529E9EBEC00CC403A /* MainMessagesViewModel.swift */,
 				D0B012CD29EABE4300CC403A /* ChatUser.swift */,
-				D0B012CF29EABE6B00CC403A /* NewMessageUsersModel.swift */,
+				D0792B4829EB29710073077F /* ChatMessage.swift */,
+				D0996B4E29ED33A3001969EE /* RecentMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -212,9 +214,10 @@
 		D0B012D129EAD02500CC403A /* ChatMessage */ = {
 			isa = PBXGroup;
 			children = (
-				D0792B4629EB28E70073077F /* MessageView.swift */,
-				D0792B4829EB29710073077F /* ChatMessage.swift */,
+				D0B012C529E9EBEC00CC403A /* MainMessagesViewModel.swift */,
 				D0792B4A29EB299E0073077F /* ChatLogViewModel.swift */,
+				D0B012CF29EABE6B00CC403A /* NewMessageUsersModel.swift */,
+				D0792B4629EB28E70073077F /* MessageView.swift */,
 			);
 			path = ChatMessage;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				D02D5EE829E94F6E00EF2761 /* ChatApp.swift in Sources */,
 				D0B012BC29E98E6000CC403A /* ImagePicker.swift in Sources */,
 				D0B012B829E9777B00CC403A /* TextFieldHint.swift in Sources */,
+				D0996B4F29ED33A3001969EE /* RecentMessage.swift in Sources */,
 				D0B012B729E9777B00CC403A /* TextFieldName.swift in Sources */,
 				D0792B4D29EC414E0073077F /* FirebaseConstants.swift in Sources */,
 				D0792B4B29EB299E0073077F /* ChatLogViewModel.swift in Sources */,

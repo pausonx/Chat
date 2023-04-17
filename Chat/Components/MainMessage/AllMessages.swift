@@ -13,7 +13,7 @@ struct AllMessages: View {
     @ObservedObject private var MMViewModel = MainMessagesViewModel()
     @State var chatUser: ChatUser?
     @State var shouldNavigateToChatLogView = false
-    
+   
     private var chatLogViewModel = ChatLogViewModel(chatUser: nil)
     
     var body: some View {
@@ -21,14 +21,12 @@ struct AllMessages: View {
             Text("")
             ForEach(MMViewModel.recentMessages) { recent in
                 VStack {
-                    NavigationLink(destination: ChatLogView(CLViewModel: self.chatLogViewModel), isActive: self.$shouldNavigateToChatLogView){
-                    }
                     Button {
                         let uid = FirebaseManager.shared.auth.currentUser?.uid == recent.fromId ? recent.toId : recent.fromId
                         self.chatUser = .init(data: [FirebaseConstants.name: recent.name, FirebaseConstants.profileImageUrl: recent.profileImageUrl, FirebaseConstants.uid: uid])
                         self.chatLogViewModel.chatUser = self.chatUser
                         self.chatLogViewModel.fetchMessages()
-                        self.shouldNavigateToChatLogView.toggle()
+                        self.shouldNavigateToChatLogView = true
                     } label: {
                         Spacer()
                         HStack(spacing: 16) {
@@ -68,6 +66,9 @@ struct AllMessages: View {
                         .padding(.vertical, 10)
                 }.padding(.horizontal, 5)
             }
+            .background(
+                NavigationLink(destination: ChatLogView(CLViewModel: self.chatLogViewModel), isActive: self.$shouldNavigateToChatLogView){
+            })
         }
         .background(colorScheme == .dark ? Color(UIColor(.secondary.opacity(0.5))) : Color(UIColor(.secondary.opacity(0.1))))
         .padding(.top, -7)

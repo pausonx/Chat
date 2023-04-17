@@ -15,8 +15,6 @@ class ChatLogViewModel: ObservableObject {
     
     @Published var chatMessages = [ChatMessage]()
     
-    @Published var count = 0
-    
     var chatUser: ChatUser?
     
     init(chatUser: ChatUser?){
@@ -25,11 +23,15 @@ class ChatLogViewModel: ObservableObject {
         fetchMessages()
     }
     
+    var firestoreListener: ListenerRegistration?
+    
     func fetchMessages() {
         guard let fromId = FirebaseManager.shared.auth.currentUser?.uid else { return }
         guard let toId = chatUser?.uid else { return }
         
-        FirebaseManager.shared.firestore
+        firestoreListener?.remove()
+        chatMessages.removeAll()
+        firestoreListener = FirebaseManager.shared.firestore
             .collection("messages")
             .document(fromId)
             .collection(toId)
@@ -40,18 +42,14 @@ class ChatLogViewModel: ObservableObject {
                     return
                 }
                 
+                
                 querySnapshot?.documentChanges.forEach({ change in
                     if change.type == .added {
-                        do {
-                            if let message = try change.document.data(as: ChatMessage?.self) {
-                                self.chatMessages.append(message)
-                                print("Appending chatMessage in ChatLogView: \(Date())")
-                            }
-                        } catch {
-                            print("Failed to decode message: \(error)")
-                        }
+                        let data = change.document.data()
+                        self.chatMessages.append(.init(documentId: change.document.documentID, data: data))
                     }
                 })
+                self.count = 0
                 DispatchQueue.main.async {
                     self.count += 1
                 }
@@ -59,7 +57,7 @@ class ChatLogViewModel: ObservableObject {
     }
     
     func handleSend(text: String){
-        print(text)
+        //print(text)
         guard let fromId = FirebaseManager.shared.auth.currentUser?.uid else { return }
         
         guard let toId = chatUser?.uid else { return }
@@ -69,10 +67,9 @@ class ChatLogViewModel: ObservableObject {
             .collection(toId)
             .document()
         
+        let messageData = [FirebaseConstants.fromId: fromId, FirebaseConstants.toId: toId, FirebaseConstants.text: self.chatText, FirebaseConstants.timestamp: Timestamp()] as [String : Any]
         
-        let messageData = ChatMessage(id: nil, fromId: fromId, toId: toId, text: chatText, timestamp: Date())
-        
-        try? document.setData(from: messageData) { error in
+        document.setData(messageData) { error in
             if let error = error {
                 self.errorMessage = "Failed to save message into Firestore \(error)"
                 return
@@ -89,7 +86,7 @@ class ChatLogViewModel: ObservableObject {
             .collection(fromId)
             .document()
         
-        try? recipientMessageDocument.setData(from: messageData) { error in
+        recipientMessageDocument.setData(messageData) { error in
             if let error = error {
                 self.errorMessage = "Failed to save message into Firestore \(error)"
                 return
@@ -115,7 +112,7 @@ class ChatLogViewModel: ObservableObject {
             FirebaseConstants.fromId: uid,
             FirebaseConstants.toId: toId,
             FirebaseConstants.profileImageUrl: chatUser.profileImageUrl,
-            FirebaseConstants.name: chatUser.name
+            FirebaseConstants.name: chatUser.name,
         ] as [String : Any]
         
         document.setData(data) { error in
@@ -147,4 +144,7 @@ class ChatLogViewModel: ObservableObject {
                 }
             }
     }
+    
+    @Published var count = 0
+
 }
